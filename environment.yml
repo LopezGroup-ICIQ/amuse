@@ -9,4 +9,5 @@ dependencies:
   - natsort
   - scikit-learn
   - ipykernel
-
+  - nbconvert
+  - ipython_genutils
