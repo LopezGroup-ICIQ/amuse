@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: pymkm
+Version: 0.1
+Summary: Microkinetic modeling framework for heterogeneous catalysis
+Author: Santiago Morandi
+Author-email: smorandi@iciq.es
+Maintainer: Santiago Morandi
+Maintainer-email: smorandi@iciq.es
+License: MIT License
+Keywords: Heterogeneous Catalysis Electrocatalysis Microkinetic Modeling Computational Chemistry
+Classifier: Development Status :: Experimental 0.1
+Classifier: License :: MIT License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Heterogeneous Catalysis :: Microkinetic Modeling
+License-File: LICENSE

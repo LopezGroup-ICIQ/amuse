@@ -1,0 +1,12 @@
+name: amuse
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - ase
+  - pymatgen
+  - graphviz
+  - natsort
+  - scikit-learn
+  - ipykernel
+

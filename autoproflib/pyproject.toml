@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "AutoProfLib"
+version = "0.0.1"
+authors = [
+  { name="Albert Sabadell Rendón", email="asabadell@iciq.es" },
+]
+maintainers = [{name="Albert Sabadell Rendón", email="asabadell@iciq.es"}]
+description = "Generate mechanisms automaticcally for heterogeneous catalysis from ab-initio data"
+readme = "README.md"
+requires-python = ">=3.7.3"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+keywords = ["heterogeneous catalysis", "computational chemistry", "VASP"]
+dependencies = ["numpy >= 1.22",
+        "networkx >= 2.8.4",
+        "matplotlib >= 3.5.3",
+        "pandas > 1.4.3"]
+
+
+
+
+
