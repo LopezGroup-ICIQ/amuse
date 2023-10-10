@@ -1,0 +1,15 @@
+ELEMENTS
+	C
+	O 
+	H
+	N
+	Pd
+END
+
+SPECIES
+	H2 CH3CHOHCH3 CH3COCH3 N2
+END
+
+REACTIONS
+	N2 => N2                            1.E1    1.000  10000.0
+END
