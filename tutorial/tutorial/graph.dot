@@ -1,0 +1,851 @@
+strict digraph {
+
+    graph [
+        rankdir=TB,
+        ranksep=0.5,
+        nodesep=0.25
+    ];
+    
+    node [
+        shape=plaintext,
+        style=filled
+    ];
+    
+    edge [
+        weight=2.
+    ];
+
+
+    "i0" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i0</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i1" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i1</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i2" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i2</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i3" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i3</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i4" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i4</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i5" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i5</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i6" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i6</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i7" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#000000">i7</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#fde624"
+    ];
+    
+    "i8" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i8</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i9" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i9</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i10" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i10</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i11" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i11</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i12" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i12</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i13" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i13</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i14" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i14</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i15" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i15</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i16" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i16</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i17" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i17</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i18" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i18</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i19" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i19</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i20" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i20</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i21" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i21</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i22" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i22</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i23" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i23</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i24" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i24</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i25" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i25</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i26" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i26</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i27" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i27</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i28" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i28</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i29" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i29</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i30" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i30</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i31" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i31</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i32" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i32</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i33" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i33</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i34" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i34</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i35" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i35</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i36" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i36</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i37" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i37</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i38" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i38</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i39" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i39</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "i40" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff">i40</FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "H2(g)" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff"><i>H2(g)</i></FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#218f8c"
+    ];
+    
+    "CO2(g)" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff"><i>CO2(g)</i></FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#218f8c"
+    ];
+    
+    "CO(g)" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff"><i>CO(g)</i></FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "H2O(g)" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff"><i>H2O(g)</i></FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "CH4(g)" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff"><i>CH4(g)</i></FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+    
+    "CH3OH(g)" [
+        label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">
+          <TR>
+            <TD><FONT COLOR="#ffffff"><i>CH3OH(g)</i></FONT></TD>
+          </TR>
+        </TABLE>
+        >
+        ,
+        fillcolor="#430153"
+    ];
+
+
+    "i1" -> "i0"[
+        penwidth=1.0
+    ];
+    
+    "i1" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i2" -> "CO2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i2" -> "i1"[
+        penwidth=1.0
+    ];
+    
+    "i3" -> "i2"[
+        penwidth=1.0
+    ];
+    
+    "i4" -> "i3"[
+        penwidth=1.0000000000000009
+    ];
+    
+    "i5" -> "i4"[
+        penwidth=1.0000000001036424
+    ];
+    
+    "CO(g)" -> "i5"[
+        penwidth=1.0
+    ];
+    
+    "i6" -> "i5"[
+        penwidth=1.0
+    ];
+    
+    "H2O(g)" -> "i6"[
+        penwidth=1.0000000000000004
+    ];
+    
+    "i0" -> "i6"[
+        penwidth=1.0000000000000004
+    ];
+    
+    "i7" -> "i2"[
+        penwidth=1.0000000005230463
+    ];
+    
+    "i4" -> "i7"[
+        penwidth=5.0
+    ];
+    
+    "i8" -> "i7"[
+        penwidth=1.000000000001437
+    ];
+    
+    "i9" -> "i8"[
+        penwidth=1.0
+    ];
+    
+    "i10" -> "i9"[
+        penwidth=1.0
+    ];
+    
+    "i11" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i11" -> "i10"[
+        penwidth=1.0
+    ];
+    
+    "i12" -> "i11"[
+        penwidth=1.0
+    ];
+    
+    "H2O(g)" -> "i12"[
+        penwidth=1.0
+    ];
+    
+    "i13" -> "i12"[
+        penwidth=1.0
+    ];
+    
+    "i14" -> "i13"[
+        penwidth=1.0
+    ];
+    
+    "H2O(g)" -> "i14"[
+        penwidth=1.0
+    ];
+    
+    "i15" -> "i14"[
+        penwidth=1.0
+    ];
+    
+    "i16" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i16" -> "i15"[
+        penwidth=1.0
+    ];
+    
+    "i17" -> "i16"[
+        penwidth=1.0
+    ];
+    
+    "i18" -> "i17"[
+        penwidth=1.0
+    ];
+    
+    "i19" -> "i18"[
+        penwidth=1.0
+    ];
+    
+    "i19" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i20" -> "i19"[
+        penwidth=1.0
+    ];
+    
+    "i21" -> "i20"[
+        penwidth=1.0
+    ];
+    
+    "i0" -> "i21"[
+        penwidth=1.0
+    ];
+    
+    "CH4(g)" -> "i21"[
+        penwidth=1.0
+    ];
+    
+    "i22" -> "i7"[
+        penwidth=1.0000000346680373
+    ];
+    
+    "i23" -> "i22"[
+        penwidth=1.0
+    ];
+    
+    "i24" -> "i23"[
+        penwidth=1.0
+    ];
+    
+    "i24" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i25" -> "i24"[
+        penwidth=1.0
+    ];
+    
+    "H2O(g)" -> "i25"[
+        penwidth=1.0
+    ];
+    
+    "i26" -> "i25"[
+        penwidth=1.0
+    ];
+    
+    "i27" -> "i26"[
+        penwidth=1.0
+    ];
+    
+    "i28" -> "i27"[
+        penwidth=1.0
+    ];
+    
+    "i28" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i29" -> "i28"[
+        penwidth=1.0
+    ];
+    
+    "i30" -> "i29"[
+        penwidth=1.0
+    ];
+    
+    "H2O(g)" -> "i30"[
+        penwidth=1.0
+    ];
+    
+    "i17" -> "i30"[
+        penwidth=1.0
+    ];
+    
+    "i31" -> "i26"[
+        penwidth=1.0
+    ];
+    
+    "i32" -> "i31"[
+        penwidth=1.0
+    ];
+    
+    "i32" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i33" -> "i32"[
+        penwidth=1.0
+    ];
+    
+    "i34" -> "i33"[
+        penwidth=1.0
+    ];
+    
+    "i0" -> "i34"[
+        penwidth=1.0
+    ];
+    
+    "CH3OH(g)" -> "i34"[
+        penwidth=1.0
+    ];
+    
+    "i35" -> "i26"[
+        penwidth=1.0
+    ];
+    
+    "i36" -> "i35"[
+        penwidth=1.0
+    ];
+    
+    "i36" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i33" -> "i36"[
+        penwidth=1.0
+    ];
+    
+    "i37" -> "i2"[
+        penwidth=1.0000000000000027
+    ];
+    
+    "i22" -> "i37"[
+        penwidth=1.0
+    ];
+    
+    "i38" -> "i9"[
+        penwidth=1.0
+    ];
+    
+    "i38" -> "H2(g)"[
+        penwidth=1.0
+    ];
+    
+    "i39" -> "i38"[
+        penwidth=1.0
+    ];
+    
+    "i40" -> "i39"[
+        penwidth=1.0
+    ];
+    
+    "H2O(g)" -> "i39"[
+        penwidth=1.0
+    ];
+    
+    "i35" -> "i40"[
+        penwidth=1.0
+    ];
+}

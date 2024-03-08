@@ -116,18 +116,21 @@ class PreProcessor:
         self.preoutfnames = []
         self.prefreqfnames = [find_paths("OUTCAR", i)
                               for i in self.work_folders]
+        self.preoucarfnames = []
         # Automatic generation of the paths to the outputs
+
+
+
 
         if self.file_type == "CONTCAR":
             self.preoutfnames = [find_paths(self.file_type, i)
                                  for i in self.work_folders]
-
-            if len(self.preoutfnames[0][1]) > 1:
+            if len(self.preoutfnames) > 1:
 
                 for i in self.preoutfnames:
                     self.outfnames.append(i[0]+".xyz")
             else:
-                self.outfnames.append([self.preoutfnames[0] + ".xyz"])
+                self.outfnames.append([self.preoutfnames[0][0] + ".xyz"])
         else:
             self.preoutfnames = [i for i in self.work_folders]
             if len(self.preoutfnames[0]) > 1:
@@ -137,15 +140,26 @@ class PreProcessor:
 
         if not self.prefreqfnames[0]:
             self.freqfnames = self.prefreqfnames
-        elif len(self.prefreqfnames[0][1]) > 1:
+            self.preoucarfnames = self.preoucarfnames
+        elif len(self.prefreqfnames) > 1:
             for i in self.prefreqfnames:
                 for j,_ in enumerate(i):
                     if ("F" in i[j] or "f" in i[j]):
                         self.freqfnames.append(i[j])
+                    elif not ("F" in i[j] or "f" in i[j]):
+                        self.preoucarfnames.append(i[j])
                     else:
                         continue
 
         else:
+            for j in self.prefreqfnames[0]:
+                if ("F" in j or "f" in j):
+                    self.freqfnames.append(j)
+                elif not ("F" in j or "f" in j):
+                    self.preoucarfnames.append(j)
+                else:
+                    continue
+
             self.freqfnames.append(self.prefreqfnames)
 
         self.geometries = geometries
@@ -579,13 +593,13 @@ class PreProcessor:
                the enthalpy, the entropy, and the potential energy"""
         # Parse the OUTCAR file in the frequency directory
         Gibbs, Enthalpy, S, elE = [], [], [], []
-        for freqname, outfname, geometry, s in zip(
-            self.freqfnames, self.outfnames, self.geometries, self.spin):
+        for freqname,  outcar, outfname, geometry, s in zip(
+            self.freqfnames, self.preoucarfnames, self.outfnames, self.geometries, self.spin):
 
             CONTCAR = outfname[:-4]
 
             OUTCAR_FREQ = freqname
-            OUTCAR = freqname
+            OUTCAR = outcar
 #           Old parser
 #            try:
 #                open(work_folder+"/FREQ/OUTCAR", "r")
@@ -865,10 +879,10 @@ class PreProcessor:
                the internal energy, the entropy, and the potential energy"""
         # Parses the OUTCAR files
         Helmholtz,Internal_energy,Entropy,Ep,elE = [], [], [], [],[]
-        for freqname, outfname, in zip(self.freqfnames, self.outfnames):
+        for freqname, outfname, outcar in zip(self.freqfnames, self.outfnames, self.preoucarfnames):
             CONTCAR = outfname[:-4]
             OUTCAR_FREQ = freqname
-            OUTCAR = freqname
+            OUTCAR = outcar
 
 #        Old parser
 #        for work_folder, outfname in zip(self.work_folders, self.outfnames):
@@ -909,7 +923,7 @@ class PreProcessor:
 
                 frequency_list_1 = frequency_list_1 / 1000
 
-            with open(OUTCAR_FREQ, "r") as inf:
+            with open(OUTCAR, "r") as inf:
                 potential_energies = [line.strip().split() for line in inf if "energy  wi" in line]
                 potentialenergy = float(potential_energies[-1][-1])
                 inf.close()

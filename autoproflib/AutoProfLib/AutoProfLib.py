@@ -6,34 +6,44 @@
 #                                                                       #
 #########################################################################
 
-from typing import List, Tuple, Dict, Union, Optional
 import os
 import fnmatch
 
 import numpy as np
 import pandas as pd
+
 import matplotlib.pyplot as plt
 import networkx as nx
+
 import ase
-from ase import geometry, units
+from ase.build import bulk
+from math import sqrt
+from ase.atoms import Atoms
+from ase.symbols import string2symbols
+from ase.data import reference_states, atomic_numbers, chemical_symbols
+from ase.utils import plural
+from ase.io import vasp
+from ase.io import read, write
+from ase import thermochemistry
+from ase import geometry
+from ase import units
+
+import pymatgen
+from pymatgen import core
+from pymatgen.core import sites
 from pymatgen.core.structure import Molecule
 import pymatgen.symmetry.analyzer as psa
 
 
 class PreProcessor:
-    """The PreProcessor class parses geometric
+    """The PreProcessor class is a Python framework used to parse geometric
     and (both CONTCAR and .xyz files) energy (OUTCAR) information  from DFT.
     This code was first tested for iso-propanol dehydrogenation and CO2
     hydrogeantion on Pd and In2O3-based catalysts
     (https://pubs.rsc.org/en/content/articlelanding/2020/cy/d0cy00390e
     and https://www.nature.com/articles/s41467-019-11349-9)"""
 
-    def __init__(self, 
-                 work_folders: Union[List[str], str],
-                 geometries: List[str],
-                 max_freq: List[Union[str, float, bool]],
-                 spin: Union[List[int], int],
-                 file_type: str):
+    def __init__(self, work_folders, geometries,  max_freq, spin, file_type):
         """Class initialization.
            Args:
            work_folders: list of strings or string containing the paths or
@@ -92,8 +102,8 @@ class PreProcessor:
         # Selection of the OUTCAR file containing the frequencies,
         # assuming that th frequency
         # calculation outputs is in a sepparate directory
-        self.freq_name_sel = lambda x: x[0] if len(x[0]) > len(x[1]) else x[1]
-        self.ener_name = lambda x: x[0] if len(x[0]) < len(x[1]) else x[1]
+        #self.freq_name_sel = lambda x: x[0] if len(x[0]) > len(x[1]) else x[1]
+        #self.ener_name = lambda x: x[0] if len(x[0]) < len(x[1]) else x[1]
 
         def find_paths(pattern, path):
             r = []
@@ -106,18 +116,21 @@ class PreProcessor:
         self.preoutfnames = []
         self.prefreqfnames = [find_paths("OUTCAR", i)
                               for i in self.work_folders]
+        self.preoucarfnames = []
         # Automatic generation of the paths to the outputs
+
+
+
 
         if self.file_type == "CONTCAR":
             self.preoutfnames = [find_paths(self.file_type, i)
                                  for i in self.work_folders]
-
-            if len(self.preoutfnames[0][1]) > 1:
+            if len(self.preoutfnames) > 1:
 
                 for i in self.preoutfnames:
                     self.outfnames.append(i[0]+".xyz")
             else:
-                self.outfnames.append([self.preoutfnames[0] + ".xyz"])
+                self.outfnames.append([self.preoutfnames[0][0] + ".xyz"])
         else:
             self.preoutfnames = [i for i in self.work_folders]
             if len(self.preoutfnames[0]) > 1:
@@ -127,10 +140,26 @@ class PreProcessor:
 
         if not self.prefreqfnames[0]:
             self.freqfnames = self.prefreqfnames
-        elif len(self.prefreqfnames[0][1]) > 1:
+            self.preoucarfnames = self.preoucarfnames
+        elif len(self.prefreqfnames) > 1:
             for i in self.prefreqfnames:
-                self.freqfnames.append(i[1])
+                for j,_ in enumerate(i):
+                    if ("F" in i[j] or "f" in i[j]):
+                        self.freqfnames.append(i[j])
+                    elif not ("F" in i[j] or "f" in i[j]):
+                        self.preoucarfnames.append(i[j])
+                    else:
+                        continue
+
         else:
+            for j in self.prefreqfnames[0]:
+                if ("F" in j or "f" in j):
+                    self.freqfnames.append(j)
+                elif not ("F" in j or "f" in j):
+                    self.preoucarfnames.append(j)
+                else:
+                    continue
+
             self.freqfnames.append(self.prefreqfnames)
 
         self.geometries = geometries
@@ -564,13 +593,13 @@ class PreProcessor:
                the enthalpy, the entropy, and the potential energy"""
         # Parse the OUTCAR file in the frequency directory
         Gibbs, Enthalpy, S, elE = [], [], [], []
-        for freqname, outfname, geometry, s in zip(
-            self.prefreqfnames, self.outfnames, self.geometries, self.spin):
+        for freqname,  outcar, outfname, geometry, s in zip(
+            self.freqfnames, self.preoucarfnames, self.outfnames, self.geometries, self.spin):
 
             CONTCAR = outfname[:-4]
 
-            OUTCAR_FREQ = self.freq_name_sel(freqname)
-            OUTCAR = self.ener_name(freqname)
+            OUTCAR_FREQ = freqname
+            OUTCAR = outcar
 #           Old parser
 #            try:
 #                open(work_folder+"/FREQ/OUTCAR", "r")
@@ -703,7 +732,7 @@ class PreProcessor:
             frequency_list = frequency_list_1
 
             # Export the frequency list
-            freq_name = freqname[1][:-6]+"freq.txt"
+            freq_name = freqname[:-6]+"freq.txt"
             print("Frequency list saved on "+freq_name)
             with open(freq_name, "w") as outf2:
                 for freq in frequency_list:
@@ -820,7 +849,7 @@ class PreProcessor:
             print("=" * 31)
 
             # Export the summary of all the contributions to Gibbs free energy
-            energy_sum_outfname = freqname[1][:-6]+"energy_summary_"+str(self.max_freq[1])+".txt"
+            energy_sum_outfname = freqname[:-6]+"energy_summary_"+str(self.max_freq[1])+".txt"
             print("Energy summary saved at "+energy_sum_outfname)
 
             with open(energy_sum_outfname, "w") as outf3:
@@ -850,10 +879,10 @@ class PreProcessor:
                the internal energy, the entropy, and the potential energy"""
         # Parses the OUTCAR files
         Helmholtz,Internal_energy,Entropy,Ep,elE = [], [], [], [],[]
-        for freqname, outfname, in zip(self.prefreqfnames, self.outfnames):
+        for freqname, outfname, outcar in zip(self.freqfnames, self.outfnames, self.preoucarfnames):
             CONTCAR = outfname[:-4]
-            OUTCAR_FREQ = self.freq_name_sel(freqname)
-            OUTCAR = self.ener_name(freqname)
+            OUTCAR_FREQ = freqname
+            OUTCAR = outcar
 
 #        Old parser
 #        for work_folder, outfname in zip(self.work_folders, self.outfnames):
@@ -894,7 +923,7 @@ class PreProcessor:
 
                 frequency_list_1 = frequency_list_1 / 1000
 
-            with open(OUTCAR_FREQ, "r") as inf:
+            with open(OUTCAR, "r") as inf:
                 potential_energies = [line.strip().split() for line in inf if "energy  wi" in line]
                 potentialenergy = float(potential_energies[-1][-1])
                 inf.close()
@@ -916,7 +945,7 @@ class PreProcessor:
 #                work_folder = work_folder
 
 #            freq_name = work_folder + "freq.txt"
-            freq_name = freqname[1][:-6] + "freq.txt"
+            freq_name = freqname[:-6] + "freq.txt"
             print("Frequency list saved on "+freq_name)
             with open(freq_name, "w") as outf2:
                 for freq in frequency_list:
@@ -963,7 +992,7 @@ class PreProcessor:
             print("=" *31)
 
             #energy_sum_outfname = work_folder+"energy_summary_"+str(self.max_freq[1])+".txt"
-            energy_sum_outfname = freqname[1][:-6]+"energy_summary_"+str(self.max_freq[1])+".txt"
+            energy_sum_outfname = freqname[:-6]+"energy_summary_"+str(self.max_freq[1])+".txt"
             print("Energy summary saved at "+str(energy_sum_outfname))
 
             with open(energy_sum_outfname, "w") as outf3:
@@ -3250,7 +3279,7 @@ class AutoProfLib:
             first_line += gas_Labels[0]+" "+"+"+" "+gas_Labels[1]+" "+"->"
             first_line += " "+gas_Labels[-1]
         elif react_type == "Dehyd":
-            first_line = "Add Reaction Label: Add Reaction Number "
+            first_line = "Add Reaction Label Add Reaction Number: "
             first_line += gas_Labels[0]+" "+"->"
             first_line += " "+gas_Labels[-1]+" "+"+"+" "+gas_Labels[1]
         elif react_type == "No_gas":
