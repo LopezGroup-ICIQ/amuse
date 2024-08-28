@@ -61,48 +61,6 @@ f3 = Constant(0.0)
 # Advection
 r = Constant(0.0)
 
-# Neumann condition for reaction at catalyst surface
-def g(ii,jj):
-
-    
-    if ii < 1e-5:
-        ii = ii
-        jj = jj
-    else:
-        if jj + ii != 1.0:
-            ii = round(ii,2)
-            jj = round(jj,2)
-            try:
-                x = model.kinetic_run(T, P, np.asarray([ii,jj]))
-            except:
-                new_ii = ii / (ii + jj)
-                new_jj = 1 - new_ii
-                try:
-                    x = model.kinetic_run(T, P, np.asarray([new_ii,new_jj]))
-                except:
-                    ii = ii
-                    jj = jj
-                else:
-                    ii = x["y_out"]["A(g)"] * (ii+jj)
-                    jj = x["y_out"]["B(g)"] * (ii+jj) 
-            else:
-                ii = x["y_out"]["A(g)"]
-                jj = x["y_out"]["B(g)"]
-        elif jj + ii == 1.0:
-            try:
-                x = model.kinetic_run(T, P, np.asarray([ii,jj]))
-            except:
-                ii = ii
-                jj = jj
-            else:
-                ii = x["y_out"]["A(g)"]
-                jj = x["y_out"]["B(g)"]
-        else:
-            ii = ii
-            jj = jj
-
-    #return K2*u # Could be function of concentration or call the MKM here !
-    return ii,jj
 
 # Initial condition
 x = SpatialCoordinate(mesh)
@@ -178,7 +136,7 @@ solver_parameters = {
 }
 
 # Iterating and solving over the time
-t = dt
+t = 0.0
 T_total = 1.0
 step = 0
 plot_step_mod = 1
@@ -236,73 +194,71 @@ while t < T_total and norm_l2 > tolerance:
     
     t += dt
 
-# *** Plotting ***
-# Plot the results or save them as needed
+
+print("The reactive wall is reached")
+
+ii = u0_sol.dat.data[-1]
+jj = u1_sol.dat.data[-1]
+
+if ii < 1e-5:
+    ii = ii
+    jj = jj
+else:
+    if jj + ii != 1.0:
+        ii = round(ii,2)
+        jj = round(jj,2)
+        try:
+            x = model.kinetic_run(T, P, np.asarray([ii,jj]))
+        except:
+            new_ii = ii / (ii + jj)
+            new_jj = 1 - new_ii
+            try:
+                x = model.kinetic_run(T, P, np.asarray([new_ii,new_jj]))
+            except:
+                ii = ii
+                jj = jj
+            else:
+                ii = x["y_out"]["A(g)"] * (ii+jj)
+                jj = x["y_out"]["B(g)"] * (ii+jj) 
+        else:
+            ii = x["y_out"]["A(g)"]
+            jj = x["y_out"]["B(g)"]
+    elif jj + ii == 1.0:
+        try:
+            x = model.kinetic_run(T, P, np.asarray([ii,jj]))
+        except:
+            ii = ii
+            jj = jj
+        else:
+            ii = x["y_out"]["A(g)"]
+            jj = x["y_out"]["B(g)"]
+    else:
+        ii = ii
+        jj = jj
+    
+
+print("The reaction took place and the value of the fields are: u="+str(ii)+" v="+str(jj))
+
+
+u0_sol_values[-1][-1] = ii
+u1_sol_values[-1][-1] = jj
+
+
+
+
 # Colormap
 fig = plt.figure(dpi=300, figsize=(8, 6))
-U1 = np.array(u0_sol_values)
-p = plt.imshow(U1, origin="lower", aspect='auto', cmap='jet', vmin=0.0, vmax=1.0)
+Vplot = np.array(u0_sol_values)
+p = plt.imshow(Vplot, origin="lower", aspect='auto', cmap='jet')
 clb = plt.colorbar(p)
 plt.xlabel(r'x')
 plt.ylabel(r't')
-plt.savefig('CA_profile.png')
-
+plt.savefig('gray-scott-pattern_u_2_end.png')
 
 fig = plt.figure(dpi=300, figsize=(8, 6))
-U1 = np.array(u1_sol_values)
-p = plt.imshow(U1, origin="lower", aspect='auto', cmap='jet', vmin=0.0, vmax=1.0)
+Vplot = np.array(u1_sol_values)
+p = plt.imshow(Vplot, origin="lower", aspect='auto', cmap='jet')
 clb = plt.colorbar(p)
 plt.xlabel(r'x')
 plt.ylabel(r't')
-plt.savefig('CB_profile.png')
-
-fig = plt.figure(dpi=300, figsize=(8, 6))
-U1 = np.array(u2_sol_values)
-p = plt.imshow(U1, origin="lower", aspect='auto', cmap='jet', vmin=0.0, vmax=1.0)
-clb = plt.colorbar(p)
-plt.xlabel(r'x')
-plt.ylabel(r't')
-plt.savefig('CC_profile.png')
-
-fig = plt.figure(dpi=300, figsize=(8, 6))
-U1 = np.array(u3_sol_values)
-p = plt.imshow(U1, origin="lower", aspect='auto', cmap='jet', vmin=0.0, vmax=1.0)
-clb = plt.colorbar(p)
-plt.xlabel(r'x')
-plt.ylabel(r't')
-plt.savefig('CD_profile.png')
-
-
-
-print(u0_sol_values[-1][-1])
-print(u1_sol_values[-1][-1])
-
-u_value_0, v_value_0 = g(u0_sol_values[-1][-1], u1_sol_values[-1][-1])
-
-print(u_value_0, v_value_0)
-## Setting up the figure object
-#fig = plt.figure(dpi=300)
-#ax = plt.subplot(111)
-#
-## Plotting the data
-#for i in range(len(u0_sol_values)):
-#    ax.plot(x_values, u0_sol_values[i], label=('step %i' % (i + 1)))
-#
-## Getting and setting the legend
-#box = ax.get_position()
-#ax.set_position([box.x0, box.y0, 1.01 * box.width, box.height])
-#ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-#
-## Setting the xy-labels
-#plt.xlabel(r'$x$ [L]')
-#plt.ylabel(r'$u$ [population density]')
-#plt.xlim(x_values.min(), x_values.max())
-#
-## Setting the grids in the figure
-#plt.minorticks_on()
-#plt.grid(True)
-#plt.grid(False, linestyle='--', linewidth=0.5, which='major')
-#plt.grid(False, linestyle='--', linewidth=0.1, which='minor')
-#
-## Displaying the plot
-#plt.show()
+plt.savefig('gray-scott-pattern_v_2_end.png')

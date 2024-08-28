@@ -39,7 +39,7 @@ u0, u1 = TrialFunction(V),TrialFunction(V)
 u0r, u1r = Function(V), Function(V)
 
 u0_sol, u1_sol = Function(V),Function(V)
-#u0_k_sol, u1_k_sol = Function(V),Function(V)
+u0_k_sol, u1_k_sol = Function(V),Function(V)
 
 v0, v1 = TestFunction(V),TestFunction(V)
 
@@ -85,32 +85,24 @@ dt = 0.01
 u0r.assign(ic0)
 u1r.assign(ic0)
 
+u0r.dat.data[0] = 1.0
+u1r.dat.data[0] = 0.0
+
+u0_k_sol.dat.data[0] = 1.0
+u1_k_sol.dat.data[0] = 0.0
+
 def solve_function():
     
     
 
- 
-    F0 = inner((u0-u0r) / dt, v0) * dx + inner(Constant(0.01) * grad(u0), grad(v0)) * dx 
-    
-    
-    
-    # ** V part **
-    F1 = inner((u1-u1r) / dt, v1) * dx + inner(Constant(0.01) * grad(u1), grad(v1)) * dx 
-    
-    a0, L0 = lhs(F0), rhs(F0)
-    a1, L1 = lhs(F1), rhs(F1)
 
-
-    solve(a0 == L0, u0_sol, bcs=bcs0, solver_parameters=solver_parameters)
-    solve(a1 == L1, u1_sol, bcs=bcs1, solver_parameters=solver_parameters)
-
-    print(u0_sol.dat.data[0])
-    print(u1_sol.dat.data[0])
+    print(u0_sol.dat.data[3500])
+    print(u1_sol.dat.data[3500])
 
     ws0 = []
     ws1 = []
     for ii,jj,index in zip(u0_sol.dat.data, u1_sol.dat.data, range(len(u1_sol.dat.data))):
-        if index == 0:
+        if index == 98545:
 
             if ii < 1e-5:
                 ii = ii
@@ -157,12 +149,27 @@ def solve_function():
         ws0.append(ii)
         ws1.append(jj) 
 
-    u0_sol.dat.data[:] = np.asarray(ws0)
-    u1_sol.dat.data[:] = np.asarray(ws1)
+    u0_k_sol.dat.data[:] = np.asarray(ws0)
+    u1_k_sol.dat.data[:] = np.asarray(ws1)
 
-    print(u0_sol.dat.data[0])
-    print(u1_sol.dat.data[0])
+    #u0r.dat.data[:] =  u0_sol.dat.data[:]
+    #u1r.dat.data[:] =  u1_sol.dat.data[:]
 
+    F0 = inner((u0-u0_k_sol) / dt, v0) * dx + inner(Constant(1.0) * grad(u0), grad(v0)) * dx 
+    
+    
+    # ** V part **
+    F1 = inner((u1-u1_k_sol) / dt, v1) * dx + inner(Constant(1.0) * grad(u1), grad(v1)) * dx 
+
+    a0, L0 = lhs(F0), rhs(F0)
+    a1, L1 = lhs(F1), rhs(F1)
+
+
+    solve(a0 == L0, u0_sol, bcs=bcs0, solver_parameters=solver_parameters)
+    solve(a1 == L1, u1_sol, bcs=bcs1, solver_parameters=solver_parameters)
+    
+    print(u0_sol.dat.data[3500])
+    print(u1_sol.dat.data[3500])
 
 
 
@@ -177,7 +184,7 @@ def solve_function():
 
     #u0r.dat.data[:] = u0_sol.dat.data[:]
     #u1r.dat.data[:] = u1_sol.dat.data[:]
-    norm_l2 = norm(u0_sol - u0r, mesh=mesh)+ norm(u1_sol - u1r, mesh=mesh)
+    norm_l2 = norm(u0_sol - u0r - u0_k_sol, mesh=mesh)+ norm(u1_sol - u1r - u1_k_sol, mesh=mesh)
 
 
     return u0_sol,u1_sol, norm_l2

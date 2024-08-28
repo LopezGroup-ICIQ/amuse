@@ -1492,7 +1492,8 @@ class AutoProfLib:
 
             else:
                 Raw_Data =  [self.import_data(i) for i in self.surface_phase[0]]
-            self.coords_list = np.asarray([self.get_coord_dict(i)[1] for i in Raw_Data])
+            
+            self.coords_list = [self.get_coord_dict(i)[1] for i in Raw_Data]
             unsorted_dicts = [self.get_coord_dict(i)[0] for i in Raw_Data]
         else:
             Raw_Data = []
@@ -1506,7 +1507,7 @@ class AutoProfLib:
             else:
                 Raw_Data_gas =  [self.import_data(i) for i in self.gas_phase[0]]
 
-            self.coords_list_gas = np.asarray([self.get_coord_dict(i)[1] for i in Raw_Data_gas])
+            self.coords_list_gas = [self.get_coord_dict(i)[1] for i in Raw_Data_gas]
             unsorted_dicts_gas = [self.get_coord_dict(i)[0] for i in Raw_Data_gas]
         else:
             Raw_Data_gas = []
@@ -1520,8 +1521,8 @@ class AutoProfLib:
                                 for i in self.TSs_preprocessor.outfnames]
             else:
                 Raw_Data_TSs =  [self.import_data(i) for i in self.TSs[0]]
-            self.coords_list_TSs = np.asarray([self.get_coord_dict(i)[1]
-                                               for i in Raw_Data_TSs])
+            self.coords_list_TSs = [self.get_coord_dict(i)[1]
+                                               for i in Raw_Data_TSs]
             unsorted_dicts_TSs = [self.get_coord_dict(i)[0] for i in Raw_Data_TSs]
         else:
             Raw_Data_TSs = []
