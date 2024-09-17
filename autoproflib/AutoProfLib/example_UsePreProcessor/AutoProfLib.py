@@ -711,7 +711,7 @@ class PreProcessor:
                     Symmetry=1
                 elif Pgroup in ['C2', 'C2v', 'D*h']:
                     Symmetry=2
-                elif Pgroup=='C3v':
+                elif Pgroup in ['C3v', 'C3h']:
                     Symmetry=3
                 elif Pgroup=='D2h':
                     Symmetry=4
