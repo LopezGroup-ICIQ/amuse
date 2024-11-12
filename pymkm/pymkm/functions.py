@@ -1,11 +1,9 @@
 import numpy as np
 import scipy.stats as st
 from constants import *
-from sklearn.linear_model import LinearRegression
-
 from rm_parser import stoic_forward, stoic_backward
 
-def kinetic_coeff(NR, dg_reaction, dg_barrier, temperature, reaction_type, m, a_site=1e-19):
+def kinetic_coeff(NR, dg_reaction, dg_barrier, temperature, reaction_type, m,a_site=1e-19):
         """
         Returns the kinetic coefficient for direct and reverse elementary reactions,
         based on transition state theory and collision theory (for adsorption).
@@ -31,12 +29,15 @@ def kinetic_coeff(NR, dg_reaction, dg_barrier, temperature, reaction_type, m, a_
             Keq[reaction] = np.exp(-dg_reaction[reaction] / temperature / K_B)
             if reaction_type[reaction] == 'ads':
                 A = a_site / (2 * np.pi * m[reaction] * K_BU * temperature)**0.5
-                kd[reaction] = A * np.exp(-dg_barrier[reaction] / K_B / temperature)
+                #kd[reaction] = A * np.exp(-dg_barrier[reaction] / K_B / temperature)          
+                kd[reaction] = A
                 kr[reaction] = kd[reaction] / Keq[reaction]
             elif reaction_type[reaction] == 'des':
                 A = (K_B * temperature / H)
                 kd[reaction] = A * np.exp(-dg_barrier[reaction] / temperature / K_B)
-                kr[reaction] = kd[reaction] / Keq[reaction]
+#                kr[reaction] = kd[reaction] / Keq[reaction]
+                kr[reaction] =  a_site / (2 * np.pi * m[reaction] * K_BU * temperature)**0.5
+ 
             else:  # Surface reaction
                 A = (K_B * temperature / H)
                 kd[reaction] = A * np.exp(-dg_barrier[reaction] / temperature / K_B)
@@ -89,9 +90,9 @@ def calc_eapp(temperature_vector, reaction_rate_vector):
     y = np.log(np.asarray([i[0] for i in reaction_rate_vector]))
     lin = st.linregress(x, y)
 
-    Eapp = - (R / 1000.0) * lin[0]  # kJ/mol 
-    r2 = lin[2]
-    return Eapp, r2
+    Eapp = -(R/1000.0) * lin[0]  # kJ/mol (typical unit of measure)
+    R2 = lin[2]
+    return Eapp, R2
 
 def calc_reac_order(partial_pressure, reaction_rate):
     """
